@@ -61,7 +61,7 @@ RUN echo "@today_str"
     os_code_name=os_code_name,
 ))@
 
-RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y devscripts dpkg-dev python3-apt python3-empy python3-rosdistro-modules python3-yaml
+RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y devscripts dpkg-dev git python3-apt python3-empy python3-rosdistro-modules python3-yaml
 @(TEMPLATE(
     'snippet/custom_catkin_pkg_modules.Dockerfile.em',
     branch_name='wip-package-format-3',
