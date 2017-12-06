@@ -36,7 +36,11 @@ RUN echo "@today_str"
     os_code_name='xenial',
 ))@
 
-RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python3-catkin-pkg-modules python3-rosdistro python3-yaml
+RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python3-rosdistro python3-yaml
+
+# TODO(nuclearsandwich) This is very a hack to install a modified copy of catkin-pkg. It's fine for now.
+RUN git clone https://github.com/ros-infrastructure/catkin_pkg -b wip-package-format-3 /tmp/catkin-pkg
+RUN cd /tmp/catkin-pkg && python3 setup.py install
 
 USER buildfarm
 ENTRYPOINT ["sh", "-c"]
