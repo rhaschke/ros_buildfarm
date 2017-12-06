@@ -38,9 +38,10 @@ RUN echo "@today_str"
 
 RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python3-rosdistro python3-yaml
 
-# TODO(nuclearsandwich) This is very a hack to install a modified copy of catkin-pkg. It's fine for now.
-RUN git clone https://github.com/ros-infrastructure/catkin_pkg -b wip-package-format-3 /tmp/catkin-pkg
-RUN cd /tmp/catkin-pkg && python3 setup.py install
+@(TEMPLATE(
+    'snippet/custom_catkin_pkg_modules.Dockerfile.em',
+    branch_name='wip-package-format-3',
+))@
 
 USER buildfarm
 ENTRYPOINT ["sh", "-c"]

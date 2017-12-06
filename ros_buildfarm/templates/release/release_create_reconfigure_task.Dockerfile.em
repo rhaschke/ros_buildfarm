@@ -36,8 +36,13 @@ RUN echo "@today_str"
     os_code_name='xenial',
 ))@
 
-RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python3-catkin-pkg-modules python3-empy python3-pip python3-rosdistro-modules python3-yaml
+RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python3-empy python3-pip python3-rosdistro-modules python3-yaml
 RUN pip3 install jenkinsapi
+
+@(TEMPLATE(
+    'snippet/custom_catkin_pkg_modules.Dockerfile.em',
+    branch_name='wip-package-format-3',
+))@
 
 USER buildfarm
 ENTRYPOINT ["sh", "-c"]
