@@ -72,14 +72,14 @@ endif()
 
 if(genmsg_FOUND)
   # generate messages
-  file(GLOB message_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/msg" msg/*.msg)
+  file(GLOB_RECURSE message_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/msg" msg/*.msg)
   list(LENGTH message_files message_count)
   if(${message_count} GREATER 0)
     add_message_files(DIRECTORY msg FILES ${message_files})
   endif()
 
   # generate services
-  file(GLOB service_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/srv" srv/*.srv)
+  file(GLOB_RECURSE service_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/srv" srv/*.srv)
   list(LENGTH service_files service_count)
   if(${service_count} GREATER 0)
     add_service_files(DIRECTORY srv FILES ${service_files})
@@ -87,7 +87,7 @@ if(genmsg_FOUND)
 
   if(actionlib_msgs_FOUND)
     # generate actions
-    file(GLOB action_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/action" action/*.action)
+    file(GLOB_RECURSE action_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/action" action/*.action)
     list(LENGTH action_files action_count)
     if(${action_count} GREATER 0)
       add_action_files(DIRECTORY action FILES ${action_files})
